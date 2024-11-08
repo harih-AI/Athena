@@ -9,7 +9,7 @@ ATHENA is an intelligent study companion designed to enhance learning experience
 - **AthenoQuiz**: Generate customized quizzes based on YouTube video content to test comprehension.
 - **AthenoLite**: Get concise summaries of video content, ideal for quick review sessions.
 - **AthenoTask**: Organize and set tasks based on video insights for hands-on learning.
--**AthenoCards**: Create flashcards from video content for quick memorization and review.
+- **AthenoCards**: Create flashcards from video content for quick memorization and review.
 
 ## Technology Stack 🛠️
 
