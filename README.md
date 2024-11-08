@@ -19,7 +19,8 @@ ATHENA is a multi-functional tool designed to make online study sessions more pr
 ### AthenoQuiz
 Generate customized quizzes based on YouTube video content to test comprehension.
 
-![AthenoQuiz](./Screenshot 2024-11-08 065606)
+![Screenshot of ATHENA](https://github.com/harih-AI/Athena/raw/main/Screenshot%202024-10-24%20193829.png)
+
 
 ---
 
