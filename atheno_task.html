@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atheno Task Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            background-color: #e9f7ef; /* Light green for normal tasks */
+        }
+
+        .task.completed {
+            text-decoration: line-through;
+            background-color: #c8e6c9; /* Light green for completed tasks */
+        }
+
+        .task-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-complete {
+            background-color: #4caf50; /* Green */
+            color: white;
+        }
+
+        .btn-complete:hover {
+            background-color: #388e3c; /* Darker green on hover */
+        }
+
+        .btn-delete {
+            background-color: #dc3545; /* Red for delete */
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333; /* Darker red on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">Cloud Computing Tasks</h2>
+
+        <ul class="list-unstyled" id="taskList">
+            <li class="task" id="task1">
+                <span>Set up a cloud storage solution</span>
+                <div class="task-buttons">
+                    <button class="btn btn-complete" onclick="completeTask('task1')">Complete</button>
+                    <button class="btn btn-delete" onclick="deleteTask('task1')">Delete</button>
+                </div>
+            </li>
+            <li class="task" id="task2">
+                <span>Learn about cloud service models</span>
+                <div class="task-buttons">
+                    <button class="btn btn-complete" onclick="completeTask('task2')">Complete</button>
+                    <button class="btn btn-delete" onclick="deleteTask('task2')">Delete</button>
+                </div>
+            </li>
+            <li class="task" id="task3">
+                <span>Implement a cloud backup solution</span>
+                <div class="task-buttons">
+                    <button class="btn btn-complete" onclick="completeTask('task3')">Complete</button>
+                    <button class="btn btn-delete" onclick="deleteTask('task3')">Delete</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function completeTask(taskId) {
+            const taskElement = document.getElementById(taskId);
+            taskElement.classList.toggle('completed');
+        }
+
+        function deleteTask(taskId) {
+            const taskElement = document.getElementById(taskId);
+            taskElement.remove();
+        }
+    </script>
+</body>
+
+</html>

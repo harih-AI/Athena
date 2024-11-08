@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATHENA: AI Study Companion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9ff3, #f368e0, #48dbfb, #1dd1a1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 70px 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            animation: slide-in 0.5s ease;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            font-weight: 600;
+            background: linear-gradient(to right, #ff6b6b, #48dbfb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            animation: fade-in 1s ease-in;
+        }
+
+        .btn-primary, .option-btn {
+            background-color: #1dd1a1;
+            border: none;
+            color: #fff;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 1.2em;
+            font-weight: 500;
+            padding: 15px 25px;
+            border-radius: 30px;
+            margin: 15px;
+            box-shadow: 0 6px 15px rgba(29, 209, 161, 0.4);
+            animation: bounce 0.5s ease-in-out;
+        }
+
+        .btn-primary:hover, .option-btn:hover {
+            background-color: #10ac84;
+            transform: scale(1.05);
+            box-shadow: 0 8px 18px rgba(16, 172, 132, 0.5);
+        }
+
+        .form-control {
+            font-size: 1.2em;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid #ced4da;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #1dd1a1;
+            box-shadow: 0 0 10px rgba(29, 209, 161, 0.4);
+        }
+
+        .form-text {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        #optionsContainer {
+            display: none;
+            animation: fade-in 0.5s ease;
+            margin-top: 20px;
+        }
+
+        /* Animations */
+        @keyframes slide-in {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>ATHENA: AI Study Companion</h1>
+        <form action="/generate_quiz" method="POST" id="youtubeQuizForm">
+            <div class="mb-4">
+                <label for="video_id" class="form-label">Enter YouTube Video ID</label>
+                <input type="text" class="form-control" id="video_id" name="video_id" required pattern="[a-zA-Z0-9_-]{11}" placeholder="e.g. dQw4w9WgXcQ">
+                <div class="form-text">YouTube Video IDs are 11 characters long.</div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary" onclick="showOptions()">Launch Study Session</button>
+            </div>
+        </form>
+
+        <div id="optionsContainer">
+            <button type="button" class="option-btn" onclick="submitForm('/generate_quiz')">Atheno Quiz</button>
+            <button type="button" class="option-btn" onclick="submitForm('/athenocards')">Atheno Cards</button>
+            <button type="button" class="option-btn" onclick="submitForm('/athenolite')">Atheno Lite</button>
+            <button type="button" class="option-btn" onclick="submitForm('/athenotask')">Atheno Task</button>
+        </div>
+    </div>
+
+    <script>
+        function showOptions() {
+            document.getElementById("optionsContainer").style.display = "block";
+        }
+
+        function submitForm(action) {
+            const form = document.getElementById('youtubeQuizForm');
+            form.action = action;
+            form.method = 'POST';
+            form.submit();
+        }
+    </script>
+</body>
+
+</html>
+

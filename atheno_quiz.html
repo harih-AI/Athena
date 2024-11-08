@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Quiz container styling */
+        .quiz-container {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            position: relative;
+        }
+
+        .quiz-header {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+
+        .answer-button {
+            margin-bottom: 10px;
+            width: 100%;
+            transition: all 0.2s ease;
+            font-size: 18px;
+        }
+
+        .answer-button:hover {
+            transform: scale(1.05);
+        }
+
+        .answer-button.correct {
+            background-color: #28a745 !important;
+            color: white !important;
+        }
+
+        .answer-button.incorrect {
+            background-color: #dc3545 !important;
+            color: white !important;
+        }
+
+        .quiz-footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .score-badge {
+            background-color: #007bff;
+            color: white;
+            font-size: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 20px;
+            visibility: hidden; /* Initially hidden */
+        }
+
+        .celebration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s ease-in-out;
+        }
+
+        .celebration.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .congratulations {
+            font-size: 24px;
+            color: #28a745;
+            margin-top: 20px;
+            visibility: hidden; /* Initially hidden */
+        }
+
+        .explanation {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #6c757d; /* Grey color for explanation */
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <!-- Quiz 1 -->
+        <div class="quiz-container">
+            <h2 class="quiz-header">Quiz 1: {{ quiz1['question'] }}</h2>
+            <div id="quiz1-options" class="mb-3">
+                <button class="btn btn-outline-primary answer-button" data-answer="A">{{ quiz1['options']['A'] }}</button>
+                <button class="btn btn-outline-primary answer-button" data-answer="B">{{ quiz1['options']['B'] }}</button>
+                <button class="btn btn-outline-primary answer-button" data-answer="C">{{ quiz1['options']['C'] }}</button>
+                <button class="btn btn-outline-primary answer-button" data-answer="D">{{ quiz1['options']['D'] }}</button>
+            </div>
+            <input type="hidden" id="correct_answer_1" value="{{ quiz1['correct_answer'] }}">
+            <div class="explanation" id="explanation1">{{ quiz1['explanation'] }}</div> <!-- Explanation for Quiz 1 -->
+        </div>
+    
+        <!-- Quiz 2 -->
+        <div class="quiz-container">
+            <h2 class="quiz-header">Quiz 2: {{ quiz2['question'] }}</h2>
+            <div id="quiz2-options" class="mb-3">
+                <button class="btn btn-outline-primary answer-button" data-answer="A">{{ quiz2['options']['A'] }}</button>
+                <button class="btn btn-outline-primary answer-button" data-answer="B">{{ quiz2['options']['B'] }}</button>
+                <button class="btn btn-outline-primary answer-button" data-answer="C">{{ quiz2['options']['C'] }}</button>
+                <button class="btn btn-outline-primary answer-button" data-answer="D">{{ quiz2['options']['D'] }}</button>
+            </div>
+            <input type="hidden" id="correct_answer_2" value="{{ quiz2['correct_answer'] }}">
+            <div class="explanation" id="explanation2">{{ quiz2['explanation'] }}</div> <!-- Explanation for Quiz 2 -->
+        </div>
+    </div>
+    
+
+        <!-- Score and Reset Button -->
+        <div class="quiz-footer">
+            <button class="btn btn-success" id="resetButton">Reset Quizzes</button>
+            <div class="score-badge" id="score">Score: 0/2</div>
+            <div class="congratulations" id="congratulations">Congratulations! You answered both quizzes correctly!</div>
+        </div>
+    </div>
+
+    <!-- Celebration Popup -->
+    <div class="celebration" id="celebration">
+        <div class="fireworks"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        const buttons1 = document.querySelectorAll('#quiz1-options .answer-button');
+        const buttons2 = document.querySelectorAll('#quiz2-options .answer-button');
+        const correctAnswer1 = document.getElementById('correct_answer_1').value;
+        const correctAnswer2 = document.getElementById('correct_answer_2').value;
+        let score = 0;
+
+        function handleAnswer(quizNum, selectedButton, correctAnswer) {
+            const buttons = quizNum === 1 ? buttons1 : buttons2;
+            const explanationElement = document.getElementById(`explanation${quizNum}`);
+
+            // Mark the selected button as correct or incorrect
+            if (selectedButton.getAttribute('data-answer') === correctAnswer) {
+                selectedButton.classList.add('correct');
+                score++;
+                showConfetti(); // Trigger confetti for a correct answer
+            } else {
+                selectedButton.classList.add('incorrect');
+                explanationElement.style.display = 'block'; // Show explanation for the wrong answer
+            }
+
+            // Disable all buttons after selection
+            buttons.forEach(btn => {
+                btn.disabled = true;
+            });
+
+            // Update score badge
+            document.getElementById('score').innerText = `Score: ${score}/2`;
+            document.getElementById('score').style.visibility = 'visible'; // Make the score badge visible
+
+            // Check if both answers are correct
+            if (score === 2) {
+                document.getElementById('celebration').classList.add('active');
+                document.getElementById('congratulations').style.visibility = 'visible'; // Show congratulations message
+            }
+        }
+
+        // Confetti Function
+        function showConfetti() {
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // Attach event listeners for Quiz 1
+        buttons1.forEach(button => {
+            button.addEventListener('click', function () {
+                handleAnswer(1, this, correctAnswer1);
+            });
+        });
+
+        // Attach event listeners for Quiz 2
+        buttons2.forEach(button => {
+            button.addEventListener('click', function () {
+                handleAnswer(2, this, correctAnswer2);
+            });
+        });
+
+        // Reset button functionality
+        document.getElementById('resetButton').addEventListener('click', function () {
+            buttons1.forEach(button => {
+                button.classList.remove('correct', 'incorrect');
+                button.disabled = false;
+            });
+            buttons2.forEach(button => {
+                button.classList.remove('correct', 'incorrect');
+                button.disabled = false;
+            });
+
+            // Reset score and visibility
+            score = 0;
+            document.getElementById('score').innerText = `Score: 0/2`;
+            document.getElementById('score').style.visibility = 'hidden'; // Hide the score badge
+            document.getElementById('celebration').classList.remove('active');
+            document.getElementById('congratulations').style.visibility = 'hidden'; // Hide congratulations message
+            
+            // Hide all explanations
+            document.querySelectorAll('.explanation').forEach(explanation => {
+                explanation.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
