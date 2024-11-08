@@ -22,7 +22,7 @@ ATHENA is a multi-functional tool designed to make online study sessions more pr
 
 ![Problem Statement](https://github.com/harih-AI/Athena/raw/main/Screenshot%202024-11-08%20074437.png)
 
-###Athena Demo
+
 ![Athena Demo](https://github.com/harih-AI/Athena/blob/main/NewProject-MadewithClipchamp-ezgif.com-video-to-gif-converter.gif)
 
 
