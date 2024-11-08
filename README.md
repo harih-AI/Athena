@@ -18,6 +18,10 @@ ATHENA is a multi-functional tool designed to make online study sessions more pr
 
 ATHENA is a multi-functional tool designed to make online study sessions more productive and enjoyable.
 
+## Problem Statement
+
+![Problem Statement](https://github.com/harih-AI/Athena/raw/main/Screenshot%202024-11-08%20074437.png)
+
 ## Screenshots
 
 ### Screenshot 1
