@@ -14,41 +14,24 @@ ATHENA is an intelligent study companion designed to enhance learning experience
 
 ATHENA is a multi-functional tool designed to make online study sessions more productive and enjoyable. Each mode offers a unique feature tailored for online learning needs.
 
-## Features
+# ATHENA: An AI-Powered Study Companion
 
-### AthenoQuiz
-Generate customized quizzes based on YouTube video content to test comprehension.
+ATHENA is a multi-functional tool designed to make online study sessions more productive and enjoyable.
 
-![Screenshot of ATHENA](https://github.com/harih-AI/Athena/raw/main/Screenshot%202024-10-24%20193829.png)
+## Screenshots
 
+### Screenshot 1
+![Screenshot of ATHENA - Image 1](https://github.com/harih-AI/Athena/raw/main/Screenshot%202024-10-24%20193829.png)
 
----
+### Screenshot 2
+![Screenshot of ATHENA - Image 2](https://github.com/harih-AI/Athena/raw/main/Screenshot%202024-11-08%20065510.png)
 
-### AthenoLite
-Get concise summaries of video content, ideal for quick review sessions.
+### Screenshot 3
+![Screenshot of ATHENA - Image 3](https://github.com/harih-AI/Athena/raw/main/Screenshot%202024-11-08%20065606.png)
 
-![AthenoLite](./Screenshot 2024-10-24 194403)
+### Screenshot 4
+![Screenshot of ATHENA - Image 4](https://github.com/harih-AI/Athena/raw/main/Screenshot%202024-10-24%20194403.png)
 
----
-
-### AthenoTask
-Organize and set tasks based on video insights for hands-on learning.
-
-![AthenoTask](./images/athenotask.png)
-
----
-
-### AthenoNote
-Capture essential notes and highlights from the video to aid long-term retention.
-
-![AthenoNote](./images/athenonote.png)
-
----
-
-### AthenoCards
-Flashcard-style prompts to help reinforce key concepts.
-
-![AthenoCards](./images/athenocards.png)
 
 ## Technology Stack 🛠️
 
